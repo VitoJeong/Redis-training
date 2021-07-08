@@ -1,8 +1,6 @@
 package com.redis.training.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -16,13 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @RequiredArgsConstructor
 public class RedisConfig {
 
-    @Value("${spring.redis.port}")
-    private int port;
-
-    @Value("${spring.redis.host}")
-    private String host;
-
-    public final ObjectMapper objectMapper;
+    private final RedisProperties redisProperties;
 
     /**
      * RedisTemplate (RedisAutoConfiguration은 RedisTemplate, StringRedisTemplate 두 가지 bean 생성)
@@ -45,10 +37,11 @@ public class RedisConfig {
      */
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
+        // 단일 노드 Redis와 연결하는 RedisConnection을 설정하는 데 필요한 클래스
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
 
-        redisStandaloneConfiguration.setHostName(host);
-        redisStandaloneConfiguration.setPort(port);
+        redisStandaloneConfiguration.setHostName(redisProperties.getHost());
+        redisStandaloneConfiguration.setPort(redisProperties.getPort());
         LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
         return connectionFactory;
     }

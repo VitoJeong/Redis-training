@@ -1,6 +1,5 @@
 package com.redis.training.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -19,8 +18,6 @@ import java.time.Duration;
 @Configuration
 @RequiredArgsConstructor
 public class CacheConfig {
-
-    public final ObjectMapper objectMapper;
 
     // RedisConfig 클래스에 스프링빈으로 등록된 커넥션팩토리를 주입받음
     public final RedisConnectionFactory connectionFactory;
