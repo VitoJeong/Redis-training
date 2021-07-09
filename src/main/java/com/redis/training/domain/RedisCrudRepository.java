@@ -1,6 +1,6 @@
 package com.redis.training.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface RedisCrudRepository extends JpaRepository<RedisCrud, Long> {
+public interface RedisCrudRepository extends CrudRepository<RedisCrud, Long> {
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/redis")
 @RequiredArgsConstructor
 @Slf4j
 public class RedisController {
@@ -36,13 +38,13 @@ public class RedisController {
         return Arrays.toString(keys.toArray());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/cache")
     public Long save(@RequestBody RedisCrudSaveRequestDto requestDto) {
         log.info(">>>>>>> [SAVE] redisCrud={}", requestDto);
         return redisCrudService.save(requestDto);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/cache/{id}")
     public RedisCrudResponseDto get(@PathVariable Long id) {
         return redisCrudService.get(id);
     }
