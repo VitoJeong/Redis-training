@@ -85,7 +85,7 @@ class RedisConfigTest {
         setOperations.add(key, "H");
         setOperations.add(key, "e");
         setOperations.add(key, "l");
-        setOperations.add(key, "l"); // 중복 값은 최근값으로 교체
+        setOperations.add(key, "l");
         setOperations.add(key, "o");
 
         Set<String> result = setOperations.members(key);
